@@ -18,4 +18,17 @@ class TaskController extends Controller
 
         return view('tasks.index', ['tasks' => $tasks]);
     }
+
+    public function show(Task $task): View
+    {
+        return view('tasks.show', ['task' => $task]);
+    }
+
+    public function complete(Task $task)
+    {
+        $task->completed = !$task->completed;
+        $task->save();
+
+        return redirect()->back();
+    }
 }

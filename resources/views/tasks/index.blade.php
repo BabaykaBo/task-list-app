@@ -8,7 +8,8 @@
     <div>
         @forelse ($tasks as $task)
             <div>
-                <a @class(['font-bold', 'line-through' => $task->completed]) href="#">{{ $task->title }}</a>
+                <a @class(['font-bold', 'line-through' => $task->completed])
+                    href="{{ route('tasks.show', ['task' => $task]) }}">{{ $task->title }}</a>
             </div>
         @empty
             <div>There are no tasks...</div>
