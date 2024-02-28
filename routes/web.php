@@ -26,7 +26,11 @@ Route::redirect('/tasks.index', '/tasks');
 
 Route::middleware('auth')->group(function () {
     Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+    Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
     Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
+
+    Route::post('/tasks/store', [TaskController::class, 'store'])->name('tasks.store');
+
 
     Route::put('/tasks/{task}/complete', [TaskController::class, 'complete'])->name('tasks.complete');
 

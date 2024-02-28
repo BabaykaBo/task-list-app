@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Task;
 use Auth;
+use App\Http\Requests\TaskRequest;
 
 
 class TaskController extends Controller
@@ -30,5 +31,25 @@ class TaskController extends Controller
         $task->save();
 
         return redirect()->back();
+    }
+
+    public function create(Task $task): View
+    {
+        return view('tasks.create');
+    }
+
+    public function store(TaskRequest $request)
+    {
+        $data = $request->validated();
+
+        $task = new Task();
+
+        $task->title = $data['title'];
+        $task->description = $data['description'];
+        $task->user_id = Auth::user()->id;
+
+        $task->save();
+
+        return redirect()->route('tasks.show', ['task' => $task]);
     }
 }

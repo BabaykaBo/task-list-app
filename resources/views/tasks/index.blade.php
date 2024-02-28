@@ -5,19 +5,26 @@
         </h2>
     </x-slot>
 
-    <div>
-        @forelse ($tasks as $task)
-            <div>
-                <a @class(['font-bold', 'line-through' => $task->completed])
-                    href="{{ route('tasks.show', ['task' => $task]) }}">{{ $task->title }}</a>
-            </div>
-        @empty
-            <div>There are no tasks...</div>
-        @endforelse
+    <div class="mt-5">
+        <div>
+            <a class="font-medium text-gray-700 underline decoration-pink-500" href="{{ route('tasks.create') }}">
+                Create New Task</a>
+        </div>
+        <div>
+            @forelse ($tasks as $task)
+                <div class="mb-1">
+                    <a @class(['font-bold', 'line-through' => $task->completed]) href="{{ route('tasks.show', ['task' => $task]) }}"> *
+                        {{ $task->title }}</a>
+                </div>
+            @empty
+                <div>There are no tasks...</div>
+            @endforelse
 
-        @if ($tasks->count())
-            <nav class="mt-4">{{ $tasks->links() }}</nav>
-        @endif
+            @if ($tasks->count())
+                <nav class="mt-4">{{ $tasks->links() }}</nav>
+            @endif
+        </div>
+
     </div>
 
 
