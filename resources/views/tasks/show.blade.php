@@ -29,17 +29,25 @@
                     @method('PUT')
 
                     @if ($task->completed)
-                        <button type="submit">Mark as
+                        <button class="rounded-md px-2 px-1 text-center ring-1 ring-red-700 font-medium text-gray-700 "
+                            type="submit">Mark as
                             uncompleted</button>
                     @else
-                        <button type="submit">Mark as
+                        <button
+                            class="rounded-md px-2 px-1 text-center ring-1 ring-green-700 font-medium text-gray-700 "
+                            type="submit">Mark as
                             completed</button>
                     @endif
 
                 </form>
             </div>
+            <div class="mr-10">
+                <a class="rounded-md px-2 px-1 text-center ring-1 ring-blue-700 font-medium text-gray-700 "
+                    href="{{ route('tasks.edit', ['task' => $task]) }}">Edit</a>
+            </div>
             <div>
-                <a href="{{ route('tasks.index') }}">Back</a>
+                <a class="rounded-md px-2 px-1 text-center ring-1 ring-yellow-700 font-medium text-gray-700 "
+                    href="{{ route('tasks.index') }}">Back</a>
             </div>
 
 

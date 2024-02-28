@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Task;
+use App\Models\User;
 use Auth;
+use Illuminate\Contracts\Auth\Authenticatable;
 use App\Http\Requests\TaskRequest;
+use Illuminate\Auth\Access\AuthorizationException;
 
 
 class TaskController extends Controller
@@ -22,18 +25,22 @@ class TaskController extends Controller
 
     public function show(Task $task): View
     {
+        $this->authUser(Auth::user(), $task);
+
         return view('tasks.show', ['task' => $task]);
     }
 
     public function complete(Task $task)
     {
+        $this->authUser(Auth::user(), $task);
+
         $task->completed = !$task->completed;
         $task->save();
 
         return redirect()->back();
     }
 
-    public function create(Task $task): View
+    public function create(): View
     {
         return view('tasks.create');
     }
@@ -51,5 +58,29 @@ class TaskController extends Controller
         $task->save();
 
         return redirect()->route('tasks.show', ['task' => $task]);
+    }
+
+    public function edit(Task $task): View
+    {
+        $this->authUser(Auth::user(), $task);
+
+
+        return view('tasks.edit', ['task' => $task]);
+    }
+
+    public function update(Task $task, TaskRequest $request)
+    {
+        $this->authUser(Auth::user(), $task);
+
+        $task->update($request->validated());
+
+        return redirect()->route('tasks.show', ['task' => $task]);
+
+    }
+
+    private function authUser(User | Authenticatable $user,Task $task) {
+        if ($user->id !== $task->user_id) {
+            throw new AuthorizationException('You are not authorized to view this task.');
+        }
     }
 }
