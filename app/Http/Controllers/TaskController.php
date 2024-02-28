@@ -78,6 +78,16 @@ class TaskController extends Controller
 
     }
 
+    public function destroy(Task $task)
+    {
+        $this->authUser(Auth::user(), $task);
+
+        $task->delete();
+
+        return redirect()->route('tasks.index');
+
+    }
+
     private function authUser(User | Authenticatable $user,Task $task) {
         if ($user->id !== $task->user_id) {
             throw new AuthorizationException('You are not authorized to view this task.');

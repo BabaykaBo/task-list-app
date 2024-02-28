@@ -45,6 +45,15 @@
                 <a class="rounded-md px-2 px-1 text-center ring-1 ring-blue-700 font-medium text-gray-700 "
                     href="{{ route('tasks.edit', ['task' => $task]) }}">Edit</a>
             </div>
+            <div class="mr-10">
+                <form action="{{ route('tasks.destroy', ['task' => $task]) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button class="rounded-md px-2 px-1 text-center ring-1 ring-purple-700 font-medium text-red-700 "
+                        type="submit">Delete</button>
+                </form>
+
+            </div>
             <div>
                 <a class="rounded-md px-2 px-1 text-center ring-1 ring-yellow-700 font-medium text-gray-700 "
                     href="{{ route('tasks.index') }}">Back</a>

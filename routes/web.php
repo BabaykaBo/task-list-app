@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
     Route::put('/tasks/{task}/complete', [TaskController::class, 'complete'])->name('tasks.complete');
 
+    Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+
 });
 
 Route::middleware('auth')->group(function () {
