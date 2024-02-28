@@ -36,6 +36,18 @@
                 @enderror
             </div>
 
+            <div class='mb-5'>
+                <label class="block uppercase text-slate-700 text-bold mb-2" for="title">Tags
+                    (comma-separated)</label>
+                <input class="shadow-sm border apparance-none w-full py-2 px-3 text-slate-700 leading-tight"
+                    type="text" type="text" name="tags" id="tags"
+                    placeholder="Write tags (comma-separated)..."
+                    value="{{ $task->tags()->count() > 0 ? implode(', ', $task->tags()->pluck('text')->toArray()) : '' }}">
+                @error('tags')
+                    <p class="error-message">{{ $message }}</p>
+                @enderror
+            </div>
+
 
             <div class='flex'>
                 <div class='mr-6'>

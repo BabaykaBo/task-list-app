@@ -22,6 +22,14 @@
         <p>Created at: {{ $task->created_at->diffForHumans() }}</p>
         <p>Updated at: {{ $task->updated_at->diffForHumans() }}</p>
 
+        @if ($task->tags()->count() > 0)
+            <div class="mt-5">
+                <h3 class="font-semibold text-lg mb-5 mt-5">Tags</h3>
+                <p class="font-italic text-sm text-pup=rple-300">
+                    {{ implode(', ', $task->tags()->pluck('text')->toArray()) }}</p>
+            </div>
+        @endif
+
         <div class="flex mt-5">
             <div class="mr-10">
                 <form action="{{ route('tasks.complete', ['task' => $task]) }}" method="post">
