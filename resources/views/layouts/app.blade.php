@@ -33,7 +33,8 @@
         <!-- Page Content -->
         <main>
             @if (session()->has('success'))
-                <div>{{ session('success') }}</div>
+                <div class="mb-10 rounded border-green-400 bg-green-100 px-4 py-3 text-lg text-green-700">
+                    {{ session('success') }}</div>
             @endif
             {{ $slot }}
         </main>
