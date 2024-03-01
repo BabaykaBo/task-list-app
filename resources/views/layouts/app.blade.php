@@ -32,6 +32,9 @@
 
         <!-- Page Content -->
         <main>
+            @if (session()->has('success'))
+                <div>{{ session('success') }}</div>
+            @endif
             {{ $slot }}
         </main>
     </div>

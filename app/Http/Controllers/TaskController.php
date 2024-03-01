@@ -79,7 +79,7 @@ class TaskController extends Controller
                 $task->tags()->attach($tag);
             }
         }
-        return redirect()->route('tasks.show', ['task' => $task]);
+        return redirect()->route('tasks.show', ['task' => $task])->with('success', 'Task was created successfully!');
     }
 
     public function edit(Task $task): View
@@ -134,7 +134,7 @@ class TaskController extends Controller
         }
 
 
-        return redirect()->route('tasks.show', ['task' => $task]);
+        return redirect()->route('tasks.show', ['task' => $task])->with('success', 'Task was updated successfully!');
 
     }
 
